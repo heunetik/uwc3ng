@@ -17,6 +17,7 @@ public HandleSay( id )
 		
 	// Parse the chat
 	strbreak( talk, szArg1, charsmax( szArg1 ), szArg2, charsmax( szArg2 ) );
+	new shopmenuItem = UTIL_IsItemShorthand(szArg1);
 	
 	// The player said level
 	if ( equal( szArg1, "level" ) || equal( szArg1, "/level" ) )
@@ -55,11 +56,6 @@ public HandleSay( id )
 	else if ( equal( szArg1, "shopmenu2" ) || equal( szArg1, "/shopmenu2" ) )
 	{
 		ITEM_ShowShopmenu( id, 1 );
-	}
-
-	else if ( equal( szArg1, "rings" ) || equal( szArg1, "/rings" ) )
-	{
-		COMMAND_Rings( id );
 	}
 	
 	// the player said selectattrib
@@ -204,6 +200,17 @@ public HandleSay( id )
 	else if ( equal( szArg1, "help" ) || equal( szArg1, "/help" ) )
 	{
 		COMMAND_Help( id );
+	}
+
+	else if ( equal( szArg1, "rings" ) || equal( szArg1, "/rings" ) )
+	{
+		COMMAND_Rings( id );
+	}
+
+	// shopmenu items
+	else if ( shopmenuItem != -1 )
+	{
+		ITEM_Buy( id, shopmenuItem );
 	}
 	
 	return;

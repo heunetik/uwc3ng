@@ -82,6 +82,19 @@ public _UTIL_CheckMinModelsValue( id, const cvar[], const value[] )
 		server_cmd( "kick #%d ^"cl_minmodels 1 is not allowed on this server^"", get_user_userid( id ) );
 	} 
 }
+
+public UTIL_IsItemShorthand( szArg1[] ) {
+  new index = -1;
+
+	for(new i = 0; i < MAX_SHOPMENU_ITEMS; i++) {
+		if (equali( ShopmenuShort_Names[i], szArg1 )) {
+			index = i;
+			break;
+		}
+	}
+
+	return index;
+}
 /* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
 *{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1031\\ f0\\ fs16 \n\\ par }
 */
