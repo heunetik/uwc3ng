@@ -541,7 +541,7 @@ public COMMAND_SaveXP( id )
 	}
 	
 	// Check if we can save the xp
-	if ( get_pcvar_num( CVAR_uwc3ng_savexp ) )
+	if ( get_pcvar_num( CVAR_uwc3ng_save_xp ) )
 	{
 		client_print( id, print_chat, "%s Data is automatically saved", MOD_NAME );
 	}
