@@ -39,6 +39,14 @@ public bool:ULTIMATE_CheckExecute( id, SkillID )
 		p_data_b[id][USED_GATE_TWICE] = true;
 	}
 	
+	// Player has no ultimate
+	if ( !p_data_skill[id][SkillID] )
+	{
+		UWC3NG_StatusText( id, TXT_ULTIMATE, "Ultimate not found." );
+		
+		return false;
+	}
+	
 	// The ultimate delay isn't over
 	if ( g_PlayerUltimateDelay[id] > 0 && SkillID != SKILL_REPAIR && SkillID != SKILL_MEND && SkillID != SKILL_DISPELLHEX && SkillID != SKILL_GATE && SkillID != SKILL_WARD )
 	{
@@ -61,14 +69,6 @@ public bool:ULTIMATE_CheckExecute( id, SkillID )
 	if ( !g_bUltRoundDelay )
 	{
 		client_print( id, print_chat, "%s You may not use this ability during round delay time", MOD_NAME );
-		
-		return false;
-	}
-	
-	// Player has no ultimate
-	if ( !p_data_skill[id][SkillID] )
-	{
-		UWC3NG_StatusText( id, TXT_ULTIMATE, "Ultimate not found." );
 		
 		return false;
 	}
