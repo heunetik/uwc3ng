@@ -89,16 +89,9 @@ public Create_Hud()
 					formatex( ItemTwoName, charsmax( ItemTwoName ), "%s[%d]", ItemTwoName, g_iTotalRings[players[i]] );
 				}
 			}
-			
-			// The player has no items
-			if ( g_iShopMenuItems[players[i]][ITEM_SLOT_ONE] == ITEM_NONE && g_iShopMenuItems[players[i]][ITEM_SLOT_TWO] == ITEM_NONE )
-			{
-				// Player has no item, show him that and a little info
-				formatex ( DisplayMessage, charsmax( DisplayMessage ), "%s No Items (say /shopmenu, /shopmenu2)", DisplayMessage );
-			}
-			
+
 			// The player has two items
-			else if ( g_iShopMenuItems[players[i]][ITEM_SLOT_ONE] > ITEM_NONE && g_iShopMenuItems[players[i]][ITEM_SLOT_TWO] > ITEM_NONE )
+			if ( g_iShopMenuItems[players[i]][ITEM_SLOT_ONE] > ITEM_NONE && g_iShopMenuItems[players[i]][ITEM_SLOT_TWO] > ITEM_NONE )
 			{
 				formatex ( DisplayMessage, charsmax( DisplayMessage ), "%s Magic Items: %s and %s", DisplayMessage, ItemOneName, ItemTwoName );
 			}
