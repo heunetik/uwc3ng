@@ -5,10 +5,10 @@
 
 new const szTables[TOTAL_TABLES][] = 
 {
-	"CREATE TABLE IF NOT EXISTS `uwc3ng_player` ( `player_id` int(8) unsigned NOT NULL auto_increment, `player_steamid` varchar(25) NOT NULL default '', `player_ip` varchar(20) NOT NULL default '', `player_name` varchar(35) NOT NULL default '', `player_xp` int(16) default NULL, PRIMARY KEY  (`player_id`), KEY `player_name` (`player_name`), KEY `player_ip` (`player_ip`), KEY `player_steamid` (`player_steamid`) ) TYPE=MyISAM;",
-	"CREATE TABLE IF NOT EXISTS `uwc3ng_skill` ( `player_id` int(8) unsigned NOT NULL default '0', `skill_id` int(8) default NULL, `skill_level` int(8) default NULL, PRIMARY KEY  (`player_id`,`skill_id` ) ) TYPE=MyISAM;",
-	"CREATE TABLE IF NOT EXISTS `uwc3ng_attrib` ( `player_id` int(8) unsigned NOT NULL default '0', `attrib_id` int(8) default NULL, `attrib_level` int(8) default NULL, PRIMARY KEY (`player_id`, `attrib_id` ) ) TYPE=MyISAM;",
-	"CREATE TABLE IF NOT EXISTS `uwc3ng_resist` ( `player_id` int(8) unsigned NOT NULL default '0', `resist_id` int(8) default NULL, `resist_level` int(8) default NULL, PRIMARY KEY (`player_id`, `resist_id` ) ) TYPE=MyISAM;"
+	"CREATE TABLE IF NOT EXISTS `uwc3ng_player` ( `player_id` int(8) unsigned NOT NULL auto_increment, `player_steamid` varchar(25) NOT NULL default '', `player_ip` varchar(20) NOT NULL default '', `player_name` varchar(35) NOT NULL default '', `player_xp` int(16) default NULL, PRIMARY KEY  (`player_id`), KEY `player_name` (`player_name`), KEY `player_ip` (`player_ip`), KEY `player_steamid` (`player_steamid`) ) ENGINE=MyISAM;",
+	"CREATE TABLE IF NOT EXISTS `uwc3ng_skill` ( `player_id` int(8) unsigned NOT NULL default '0', `skill_id` int(8) default NULL, `skill_level` int(8) default NULL, PRIMARY KEY  (`player_id`,`skill_id` ) ) ENGINE=MyISAM;",
+	"CREATE TABLE IF NOT EXISTS `uwc3ng_attrib` ( `player_id` int(8) unsigned NOT NULL default '0', `attrib_id` int(8) default NULL, `attrib_level` int(8) default NULL, PRIMARY KEY (`player_id`, `attrib_id` ) ) ENGINE=MyISAM;",
+	"CREATE TABLE IF NOT EXISTS `uwc3ng_resist` ( `player_id` int(8) unsigned NOT NULL default '0', `resist_id` int(8) default NULL, `resist_level` int(8) default NULL, PRIMARY KEY (`player_id`, `resist_id` ) ) ENGINE=MyISAM;"
 };
 
 // Initiate the connection to the MySQL database
