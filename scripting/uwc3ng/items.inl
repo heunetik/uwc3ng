@@ -711,7 +711,7 @@ public ITEM_Glove_Begin( id )
 	static StatusMsg[128];
 	formatex( StatusMsg, charsmax( StatusMsg ), "%d second(s) until your next grenade", g_iGloveTimer[id] );
 
-	UWC3NG_StatusText( id, TXT_BLINK_CENTER, StatusMsg );
+	UWC3NG_StatusText( id, TXT_BLINK_CENTER_SHRT, StatusMsg );
 
 	g_iGloveTimer[id]--;
 
@@ -763,7 +763,7 @@ public _ITEM_Glove_Give( id )
 		static StatusMsg[128];
 		formatex( StatusMsg, charsmax( StatusMsg ), "%d second(s) until your next grenade", g_iGloveTimer[id] );
 		
-		UWC3NG_StatusText( id, TXT_BLINK_CENTER, StatusMsg );
+		UWC3NG_StatusText( id, TXT_BLINK_CENTER_SHRT, StatusMsg );
 
 		g_iGloveTimer[id]--;
 

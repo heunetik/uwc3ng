@@ -440,6 +440,12 @@ public UWC3NG_StatusText( id, iType, const fmt[] )
 	{
 		set_hudmessage( 255, 255, 255, 0.015, 0.78, 2, 0.02, 10.0, 0.01, 0.1, HUD_ULT_ITEM );
 	}
+
+  // Short duration blink message
+	else if ( iType == TXT_BLINK_CENTER_SHRT )
+	{
+		set_hudmessage( 178, 14, 41, -1.0, -0.4, HUDMESSAGE_FX_FLICKER, 0.5, 0.7, 0.2, 0.2, HUD_AUTO );
+	}
 	
 	// All other cases
 	else

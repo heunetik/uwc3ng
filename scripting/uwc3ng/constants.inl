@@ -304,6 +304,7 @@
 #define TXT_BLINK_CENTER 4
 #define TXT_SKILL 5
 #define TXT_ULT_ITEM 7
+#define TXT_BLINK_CENTER_SHRT 8
 
 #define HUDMESSAGE_FX_FADEIN    0               // hudmessage effect types
 #define HUDMESSAGE_FX_FLICKER   1
