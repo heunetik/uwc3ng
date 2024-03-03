@@ -210,7 +210,7 @@ public ITEM_DisplayMessage( id, iItem )
 
 		case ITEM_BOOTS:
 		{
-			client_print( id, print_chat,"%s You will now run %0.0f%% faster with each weapon", MOD_NAME, ( ( get_pcvar_float( CVAR_uwc3ng_boots ) ) * 100.00 ) );
+			client_print( id, print_chat,"%s You will now run %0.0f%%%% faster with each weapon", MOD_NAME, ( ( get_pcvar_float( CVAR_uwc3ng_boots ) ) * 100.00 ) );
 		}
 
 		case ITEM_CLAWS:
@@ -221,13 +221,13 @@ public ITEM_DisplayMessage( id, iItem )
 		case ITEM_CLOAK:
 		{
 			new Float:fInvis = 100.0 * ( float( get_pcvar_num( CVAR_uwc3ng_cloak ) ) / 255.0 );
-			client_print(id, print_chat,"%s You are now %0.0f%% visible", MOD_NAME, fInvis );
+			client_print(id, print_chat,"%s You are now %0.0f%%%% visible", MOD_NAME, fInvis );
 		}
 
 		case ITEM_MASK:
 		{
 			new Float:fMask = ( 100.0 * get_pcvar_float( CVAR_uwc3ng_mask ) );
-			client_print(id, print_chat,"%s You will now gain %0.0f%% of the damage done to enemies back as health", MOD_NAME, fMask );
+			client_print(id, print_chat,"%s You will now gain %0.0f%%%% of the damage done to enemies back as health", MOD_NAME, fMask );
 		}
 
 		case ITEM_NECKLACE:
@@ -238,7 +238,7 @@ public ITEM_DisplayMessage( id, iItem )
 		case ITEM_FROST:
 		{
 			new Float:fFrost = 100.0 * ( get_pcvar_float( CVAR_uwc3ng_frost ) / 260.0 );
-			client_print(id, print_chat,"%s You will now slow enemies by %0.0f%% with each successful hit", MOD_NAME, fFrost );
+			client_print(id, print_chat,"%s You will now slow enemies by %0.0f%%%% with each successful hit", MOD_NAME, fFrost );
 		}
 
 		case ITEM_HEALTH:
