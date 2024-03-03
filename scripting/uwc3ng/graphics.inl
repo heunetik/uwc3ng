@@ -27,13 +27,17 @@ public Create_Hud()
 			
 			// Is the ultimate ready?
 			p_UltReady = false;
+			DisplayMessage = "";
+			
 			if ( g_PlayerUltimateDelay[players[i]] <= 0 )
 			{
 				p_UltReady = true;
 			}
 			
-			// Add the ultimates status
-			formatex ( DisplayMessage, charsmax( DisplayMessage ), "[ Ultimates %s ]", ( p_UltReady ? "Ready" : "Not Ready" ) );
+			if ( SKILL_hasUltimate(players[i]) )
+			{
+				formatex ( DisplayMessage, charsmax( DisplayMessage ), "[ Ultimates %s ]", ( p_UltReady ? "Ready" : "Not Ready" ) );
+			}
 			
 			// Two necklace, helms and rings? what?
 			if ( g_iShopMenuItems[players[i]][ITEM_SLOT_ONE] == g_iShopMenuItems[players[i]][ITEM_SLOT_TWO] )

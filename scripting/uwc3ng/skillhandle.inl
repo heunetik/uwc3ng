@@ -327,6 +327,20 @@ bool:SKILL_is_ultimate( SkillID, DetectAbilitiy )
 	return false;
 }
 
+// check if a player has any ultimates learned
+public bool:SKILL_hasUltimate(id) {
+	new ultimateIds[9] = { 14, 17, 25, 26, 31, 33, 34, 35, 36 };
+	for(new i = 0; i < sizeof(ultimateIds); i++)
+	{
+		if(p_data_skill[id][ultimateIds[i]] != 0)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 // Update the skills for a players
 public SKILL_Update( id )
 {
