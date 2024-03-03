@@ -56,6 +56,11 @@ public HandleSay( id )
 	{
 		ITEM_ShowShopmenu( id, 1 );
 	}
+
+	else if ( equal( szArg1, "rings" ) || equal( szArg1, "/rings" ) )
+	{
+		COMMAND_Rings( id );
+	}
 	
 	// the player said selectattrib
 	else if ( equal( szArg1, "selectattrib" ) || equal( szArg1, "/selectattrib" ) )

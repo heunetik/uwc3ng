@@ -96,6 +96,8 @@ public Load_Cvars()
 	register_clcmd ( "/shopmenu", "COMMAND_Shopmenu" ); // Open the shopmenu
 	register_clcmd ( "shopmenu2", "COMMAND_Shopmenu2" ); // Open the shopmenu2
 	register_clcmd ( "/shopmenu2", "COMMAND_Shopmenu2" ); // Open the shopmenu2
+	register_clcmd ( "/rings", "COMMAND_Rings" ); // Buy all affordable rings
+	register_clcmd ( "rings", "COMMAND_Rings" ); // Buy all affordable rings
 	register_clcmd ( "selectattrib", "COMMAND_SelectAttrib" ); // Open the select attrib menu
 	register_clcmd ( "/selectattrib", "COMMAND_SelectAttrib" ); // Open the select attrib menu
 	register_clcmd ( "resetattribs", "COMMAND_ResetAttribs" ); // Execute resetattribs

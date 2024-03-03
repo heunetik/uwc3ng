@@ -237,6 +237,19 @@ public COMMAND_Shopmenu2( id )
 	return PLUGIN_HANDLED;
 }
 
+// Buy all affordable rings
+public COMMAND_Rings( id )
+{
+	if ( !UWC3NG_Check() )
+	{
+		return PLUGIN_CONTINUE;
+	}
+	
+	ITEM_BuyRings( id );
+	
+	return PLUGIN_HANDLED;
+}
+
 // Open the select attrib menu
 public COMMAND_SelectAttrib( id )
 {
