@@ -1,0 +1,362 @@
+// Uwc3ng define & constant file
+
+// -------------------------------------- Tasks --------------------------------------
+// Task defines
+#define TASK_LOADXP 32
+#define TASK_GIVEITEMS 64
+#define TASK_SILENCEBURST 96
+#define TASK_WAVE 128
+#define TASK_GLOW 160
+#define TASK_SKIN 192
+#define TASK_DRAW 225
+#define TASK_HUD 226
+#define TASK_UDELAY 227
+#define TASK_SPEED 229
+#define TASK_JUMP 261
+
+// -------------------------------------- General --------------------------------------
+// General define's
+#define MOD_NAME "[UWC3NG]"
+
+// Team defines
+#define TEAM_T 1
+#define TEAM_CT 2
+
+// Save defines
+#define DB_MYSQLX 0
+#define DB_SQLITE 1
+#define NVAULT 2
+
+// Maxplayers and maxskills
+#define MAX_PLAYERS 33
+#define MAX_SKILLS 13
+#define MAX_LEVEL 50
+
+// Player data array defines (used for p_data var)
+#define MAX_DATA 11
+#define PLAYER_XP 0
+#define PLAYER_LVL 1
+#define PLAYER_UNIQUEID 2
+#define PLAYER_RANK 3
+#define SKILL_SIDE 4
+#define AVAILABLE_SKILL 5
+#define P_LASTARMOR 6
+#define P_FLASHCOUNT 7
+#define P_ARMORONDEATH 8
+#define P_REPAIR 9
+#define P_MEND 10
+
+// Player bool data array defines (user for p_data_b var)
+#define MAX_DATA_B 14
+#define PLAYER_LOADDATA 0
+#define PLAYER_DEFORPLAN 1
+#define SKILL_DROP 2
+#define PB_HEXED 3
+#define USED_DROP 4
+#define RESET_SKILLS 5
+#define PB_SHIELD 6
+#define PB_NIGHTVISION 7
+#define PB_DEFUSE 8
+#define PB_USP_SILENCED 9
+#define PB_M4A1_SILENCED 10
+#define PB_GLOCK_BURST 11
+#define PB_FAMAS_BURST 12
+#define PB_DIEDLASTROUND 13
+
+// How we save the data
+#define SAVEBY_STEAMID 0
+#define SAVEBY_IP 1
+#define SAVEBY_NAME 2
+
+// Type of SQlite database synchronization
+#define SQLITE_SYNC_OFF	0
+#define SQLITE_SYNC_NORMAL 1
+#define SQLITE_SYNC_FULL 2
+
+// Nvault file
+#define NVAULT_FILE "uwc3ng"
+
+// Glow
+#define MAXGLOW	150
+
+// -------------------------------------- Skills --------------------------------------
+// p_data_skill defines (look vars.inl)
+#define SKILL_LEVITATION 0
+#define SKILL_REINCARNATION 1
+#define SKILL_IMPALE 2
+#define SKILL_DEVOTION 3
+#define SKILL_HEALINGWAVE 4
+#define SKILL_MANA 5
+#define SKILL_LSKIN 6
+#define SKILL_VAMPIRIC 7
+#define SKILL_SPIKED 8
+#define SKILL_REPAIR 9
+#define SKILL_MEND 10
+#define SKILL_UNHOLYAURA 11
+#define SKILL_HEX 12
+
+// Some skill defines
+#define LEVITATION_FOR_SKILL 44
+#define HEALING_WAVE_RANGE 750
+#define LEATHER_SKIN_RANGE 750
+#define REPAIR_DIVISOR 5
+#define MEND_DIVISOR 5
+#define REPAIR_BONUS 1.4
+#define MEND_BONUS 1.4
+#define HEX_SPEED 175.0
+#define HEXED_JUMP_TIME 3.0
+
+// Menu defines
+#define MAX_SKILLS_ONSIDE 8
+
+// -------------------------------------- XPs & Roles --------------------------------------
+// PlayerRole defines
+#define PLR_NONE 0
+#define PLR_BOMB_CARRIER 1
+#define PLR_HOSTAGE_RESCUER 2
+#define PLR_VIP 3
+#define PLR_BOMB_PLANTER 4
+#define PLR_BOMB_DEFUSER 5
+
+// Objective Modifiers
+#define DEFUSING_BOMB 80			// XP awarded when the user starts to defuse the bomb
+#define DEFUSED_BOMB 160			// XP awarded when the user defuses the bomb
+#define PLANTING_BOMB 80			// XP awarded when the user starts planting the bomb
+#define PLANT_BOMB 160				// XP awarded when the user plants the bomb
+#define SPAWN_BOMB 60				// XP awarded when the user spawns with the bomb
+#define BOMB_PICKUP 60				// XP awarded when the user picks up the bomb
+#define TOUCH_HOSTAGE 70			// XP awarded when the user touches a hostage
+#define RESCUE_HOSTAGE 60			// XP awarded when the user rescues the hostage
+#define KILL_HOSTAGE 60				// XP lost when killing a hostage
+#define SPAWN_VIP 120				// XP awarded for spawning as the VIP
+#define ESCAPE_VIP 200				// XP awarded for escaping as the VIP
+#define DEFUSING_WITH_KIT 60			// XP awarded for defusing with kit
+#define OBJ_RADIUS 500				// Nearby radius to award XP for helping complete objectives
+
+// Other
+#define REPAIR_HEAL 80				// XP awarded for repair someone
+#define MEND_HEAL 80				// XP awarded for mend someone
+#define PHOENIX_XP 120				// XP awarded for respawn someone
+#define WINNING_TEAM 100			// XP awarded for win a round 
+
+// -------------------------------------- Hudmessages --------------------------------------
+// Wc3ft hudmessage defines (look UWC3NG_StatusText on graphics.inl)
+#define TXT_OTHER 0
+#define TXT_TOP_CENTER 1
+#define TXT_ULTIMATE 3
+#define TXT_BLINK_CENTER 4
+#define TXT_SKILL 5
+#define TXT_ULT_ITEM 7
+
+#define HUDMESSAGE_FX_FADEIN    0               // hudmessage effect types
+#define HUDMESSAGE_FX_FLICKER   1
+#define HUDMESSAGE_FX_WRITEOUT  2
+
+// HUD Channels
+#define HUD_SPEC_INFO			1	// Info displayed in bottom corner of player being spectated
+#define HUD_ULT_ITEM			2	// Display the two items and the status of the ultimates
+#define HUD_ULTIMATE			1	// Ultimate messages (i.e. you have _ seconds remaining)
+#define HUD_SKILL			3	// i.e. "you have evaded a shot"
+#define HUD_AUTO			-1	// Automatically choose one!
+
+// -------------------------------------- Precache --------------------------------------
+// Sounds
+#define MAX_SOUNDS 5
+
+#define SOUND_LEVELUP 0
+#define SOUND_REINCARNATION 1
+#define SOUND_IMPALE 2
+#define SOUND_ULTIMATEREADY 3
+#define SOUND_HEX 4
+
+// Sprites
+#define MAX_SPRITES 5
+
+#define SPRITE_REPAIR 0
+#define SPRITE_MEND 1
+#define SPRITE_REPAIRMEND 2
+#define SPRITE_P_REPAIR 3
+#define SPRITE_P_MEND 4
+
+// -------------------------------------- Weapons --------------------------------------
+#define CSW_WORLDSPAWN 0 
+
+#if !defined CSW_GALIL
+	#define CSW_GALIL 14
+#endif
+#if !defined CSW_FAMAS
+	#define CSW_FAMAS 15
+#endif
+
+#define CSW_WAR3_MIN 51
+
+#define	CSW_LIGHTNING 51
+#define	CSW_SUICIDE 52
+#define	CSW_IMMOLATE 53
+#define	CSW_LOCUSTS 54
+#define	CSW_SERPENTWARD 55
+#define CSW_SHADOW 56
+#define	CSW_THORNS 57
+#define	CSW_CARAPACE 58
+#define CSW_CARRION 59
+#define CSW_ORB 60
+#define CSW_CONCOCTION 61
+#define CSW_BANISH 62
+
+#define CSW_WAR3_MAX 62
+
+#define MAX_CSW_S 12
+
+// -------------------------------------- Armor --------------------------------------
+// From ../multiplayer source/dlls/player.cpp
+#define ARMOR_RATIO 0.7	// Armor Takes 30% of the damage (was .2 in the SDK)
+#define ARMOR_BONUS 0.5	// Each Point of Armor is work 1/x points of health
+
+// -------------------------------------- Ranks --------------------------------------
+// UWC3 Rank titles
+#define MAX_RANKS 12
+
+new const p_RankTitles[MAX_RANKS][] = { 
+	"Orc Fodder", 
+	"Elf Acolyte", 
+	"Human Squire", 
+	"Undead Soldier", 
+	"Skilled Combatant", 
+	"Crypt Lord Zealot", 
+	"Arch Lich", 
+	"Blood Elf Champion", 
+	"Demon Hunter", 
+	"Emissary of Death", 
+	"Warchief", 
+	"World Destroyer" 
+};
+
+// -------------------------------------- Skills --------------------------------------
+// Skill names
+new const Skill_Names[MAX_SKILLS][] = {
+	"Levitation",
+	"Equipment Reincarnation",
+	"Impale",
+	"Devotion Aura",
+	"Healing Wave",
+	"Siphon Mana",
+	"Leather Skin",
+	"Vampiric Aura",
+	"Spiked Carapace",
+	"Repair Armor",
+	"Mend Wounds",
+	"Unholy Aura",
+	"Hex"
+};
+
+// Skill required level
+new const Skill_REQLevel[MAX_SKILLS] = { 0, 0, 0, 5, 8, 10, 10, 10, 11, 13, 13, 15, 15 };
+
+// Ultimate bindings
+new const Ultimate_Bindings[MAX_SKILLS][] = {
+	"",					// Levitation
+	"",					// Equipment Reincarnation
+	"",					// Impale
+	"",					// Devotion Aura
+	"",					// Healing Wave
+	"",					// Siphon Mana
+	"",					// Leather Skin
+	"",					// Vampiric Aura
+	"",					// Spiked Carapace
+	"wcrepair",				// Repair Armor
+	"wcmend",				// Mend Wounds
+	"",					// Unholy Aura
+	""					// Hex
+};
+
+// Skill max points to spend
+new const Skill_Max_Points[MAX_SKILLS] = { 10, 3, 10, 10, 10, 10, 10, 10, 10, 1, 3, 10, 10 };
+
+// Skill const
+new const Float:p_ankh[3] = { 0.333, 0.666, 1.0 }; // Equipment reincarnation
+new const Float:p_impale[10] = { 0.04, 0.06, 0.08, 0.10, 0.13, 0.16, 0.19, 0.21, 0.24, 0.28 }; // Impale
+new const p_devotion[10]  = { 110, 112, 114, 117, 120, 123, 126, 130, 134, 140 }; // Devotion Aura
+new const Float:p_heal[10] = { 6.0, 5.5, 5.0, 4.5, 4.0, 3.5, 3.0, 2.5, 2.0, 1.5 }; // Healing Wave
+new const Float:p_mana[10] = { 0.03, 0.04, 0.05, 0.06, 0.07, 0.09, 0.11, 0.13, 0.15, 0.17 }; // Siphon Mana
+new const Float:p_lskin[10] = { 6.0, 5.5, 5.0, 4.5, 4.0, 3.5, 3.0, 2.5, 2.0, 1.5 }; // Leather Skin
+new const Float:p_vampiric[10] = { 0.10, 0.12, 0.14, 0.16, 0.18, 0.21, 0.24, 0.27, 0.30, 0.34 }; // Vampiric Aura
+new const Float:p_spiked[10] = { 0.06, 0.08, 0.10, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.31 }; // Spiked Carapace
+new const Float:p_unholy[10] = { 260.0, 265.0, 270.0, 275.0, 282.5, 290.0, 297.5, 305.0, 315.0, 325.0 }; // Unholy Aura
+new const Float:p_hex[10] = { 0.04, 0.06, 0.08, 0.10, 0.13, 0.16, 0.19, 0.21, 0.24, 0.28 }; // Hex
+
+// ------------------------------------ Weapon speeds -------------------------------------
+new const Float:CS_SPEED_VIP = 227.0;
+
+new const Float:CS_WEAPON_SPEED[31] =
+{
+	0.0,
+	250.0,      // CSW_P228
+	0.0,
+	260.0,      // CSW_SCOUT
+	250.0,      // CSW_HEGRENADE
+	240.0,      // CSW_XM1014
+	250.0,      // CSW_C4
+	250.0,      // CSW_MAC10
+	240.0,      // CSW_AUG
+	250.0,      // CSW_SMOKEGRENADE
+	250.0,      // CSW_ELITE
+	250.0,      // CSW_FIVESEVEN
+	250.0,      // CSW_UMP45
+	210.0,      // CSW_SG550
+	240.0,      // CSW_GALI
+	240.0,      // CSW_FAMAS
+	250.0,      // CSW_USP
+	250.0,      // CSW_GLOCK18
+	210.0,      // CSW_AWP
+	250.0,      // CSW_MP5NAVY
+	220.0,      // CSW_M249
+	230.0,      // CSW_M3
+	230.0,      // CSW_M4A1
+	250.0,      // CSW_TMP
+	210.0,      // CSW_G3SG1
+	250.0,      // CSW_FLASHBANG
+	250.0,      // CSW_DEAGLE
+	235.0,      // CSW_SG552
+	221.0,      // CSW_AK47
+	250.0,      // CSW_KNIFE
+	245.0       // CSW_P90
+};
+
+new const Float:CS_WEAPON_SPEED_ZOOM[31] =
+{
+	0.0,
+	0.0,
+	0.0,
+	220.0,      // CSW_SCOUT
+	0.0,
+	0.0,
+	0.0,
+	0.0,
+	240.0,      // CSW_AUG
+	0.0,
+	0.0,
+	0.0,
+	0.0,
+	150.0,      // CSW_SG550
+	0.0,
+	0.0,
+	0.0,
+	0.0,
+	150.0,      // CSW_AWP
+	0.0,
+	0.0,
+	0.0,
+	0.0,
+	0.0,
+	150.0,      // CSW_G3SG1
+	0.0,
+	0.0,
+	235.0,      // CSW_SG552
+	0.0,
+	0.0,
+	0.0
+};
+
+/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
+*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1031\\ f0\\ fs16 \n\\ par }
+*/

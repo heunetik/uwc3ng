@@ -1,0 +1,20 @@
+// Uwc3ng cvar functions
+
+public Load_Cvars()
+{
+	// Uwc3ng enabled or disabled?
+	uwc3ng_enabled = register_cvar ( "uwc3ng_enabled", "1" );
+	
+	// Where we save the xps and skills etc?
+	CVAR_uwc3ng_savexp = register_cvar ( "uwc3ng_savexp", "2" ); // 0 = MySQL, 1 = SQLLITE, 2 = Nvault
+	
+	// SQL cvars
+	CVAR_uwc3ng_host = register_cvar ( "uwc3ng_host", "127.0.0.1" ); // The host from the db
+	CVAR_uwc3ng_user = register_cvar ( "uwc3ng_user", "root" ); // The username from the db login
+	CVAR_uwc3ng_pass = register_cvar ( "uwc3ng_pass", "" ); // The password from the db login
+	CVAR_uwc3ng_name = register_cvar ( "uwc3ng_name", "uwc3ng" ); // The database name 
+}
+	
+/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
+*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1031\\ f0\\ fs16 \n\\ par }
+*/

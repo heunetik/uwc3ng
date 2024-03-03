@@ -1,0 +1,47 @@
+// Uwc3ng skills2 functions (skills 9-17)
+
+// Spiked Carapace
+public SKILL_SpikedCarapace( iAttacker, iVictim, iDamage, iHitPlace )
+{
+	new iLevel = p_data_skill[iVictim][SKILL_SPIKED];
+	
+	// Has this player spiked carapace?
+	if ( iLevel )
+	{
+		new iTemp = floatround( float( iDamage ) * p_spiked[iLevel-1] );
+		
+		// Give the victim some armor...
+		new CsArmorType:ArmorType;
+		new iCurArmor = cs_get_user_armor( iVictim, ArmorType );
+		new const iMaxArmor = 100;
+			
+		// Then set their armor to be the max
+		if ( iCurArmor + iTemp > iMaxArmor )
+		{
+			cs_set_user_armor( iVictim, iMaxArmor, ArmorType );
+		}
+			
+		// Just give them some bonus armor
+		else
+		{
+			cs_set_user_armor( iVictim, iCurArmor + iTemp, ArmorType );
+		}
+				
+		if ( is_user_alive( iAttacker ) )
+		{
+			// Damage our attacker!
+			UWC3NG_Damage( iAttacker, iVictim, iTemp, CSW_CARAPACE, iHitPlace );
+
+			// Make the user glow!
+			SHARED_Glow( iAttacker, ( 3 * iTemp ), 0, 0, 0 );
+			
+			// Create a screen fade
+			Create_ScreenFade( iAttacker, (1<<10), (1<<10), (1<<12), 255, 0, 0, iTemp );
+		}
+	}
+	
+	return;
+}
+/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
+*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1031\\ f0\\ fs16 \n\\ par }
+*/

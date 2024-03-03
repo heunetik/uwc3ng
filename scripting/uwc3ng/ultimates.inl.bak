@@ -1,0 +1,42 @@
+// Uwc3ng Ultimate functions
+
+public ULTIMATE_CheckExecute( id, SkillID )
+{
+	// Dead people can't execute ultimates
+	if ( !is_user_alive( id ) )
+	{
+		client_print( id, print_chat, "%s Shhhh, you are dead, act like it", MOD_NAME );
+		
+		return false;
+	}
+	
+	// The ultimate delay isn't over
+	if ( g_PlayerUltimateDelay[id] > 0 )
+	{
+		static DisplayText[256];
+		formatex ( DisplayText, charsmax( DisplayText ), "Ultimate not ready.^n(%d seconds remaining)", g_PlayerUltimateDelay[id] );
+		UWC3NG_StatusText( id, TXT_ULTIMATE, DisplayText );
+		
+		return false;
+	}
+	
+	// We can't use ultimates in the freezetime
+	if ( !g_FreezeTimeOver )
+	{
+		client_print( id, print_chat, "%s You may not use this ability during freezetime", MOD_NAME );
+		
+		return false;
+	}
+
+	if ( !p_data_skill[id][SkillID] )
+	{
+		UWC3NG_StatusText( id, TXT_ULTIMATE, "Ultimate not found." );
+		
+		return false;
+	}
+	
+	return true;
+}
+/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
+*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1031\\ f0\\ fs16 \n\\ par }
+*/

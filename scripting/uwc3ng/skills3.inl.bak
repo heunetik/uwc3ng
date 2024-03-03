@@ -1,0 +1,27 @@
+// Uwc3mg skills3 functions (16-24)
+
+// Thorns Aura
+public SKILL_ThornsAura( iAttacker, iVictim, iDamage, iHitPlace )
+{
+	static iSkillLevel;
+
+	// Thorns Aura ( attacker could be dead... i.e. nade )
+	iSkillLevel = p_data_skill[iVictim][SKILL_THORNSAURA];
+	if ( iSkillLevel > 0 && is_user_alive( iAttacker ) )
+	{
+		static iAdditionalDamage;
+		iAdditionalDamage = floatround( float( iDamage ) * p_thorns[iSkillLevel-1] );
+		
+		// Damage the user
+		UWC3NG_DoDamage( iAttacker, iVictim, iAdditionalDamage, CSW_THORNS, iHitPlace );
+
+		// Make the user glow!
+		SHARED_Glow( iAttacker, ( 3 * iAdditionalDamage ), 0, 0, 0 );
+		
+		// Create a screen fade
+		Create_ScreenFade( iAttacker, (1<<10), (1<<10), (1<<12), 0, 0, 255, iAdditionalDamage )
+	}
+}
+/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
+*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1031\\ f0\\ fs16 \n\\ par }
+*/

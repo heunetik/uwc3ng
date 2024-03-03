@@ -1,0 +1,33 @@
+// Uwc3ng XP functions
+
+// Calculate the xps for the player
+public CALC_XP( id, XPs )
+{
+	// The player is on level 0. He get the default xps
+	if ( p_data[id][PLAYER_LVL] <= 0 )
+	{
+		return XPs;
+	}
+	
+	// Okay, he isn't on level 0. Get the xp multiplier
+	new Float:XPmultiplier = get_pcvar_float( CVAR_uwc3ng_xpmultiplier );
+	
+	// Should we work with the xp multiplier?
+	if ( XPmultiplier )
+	{
+		// First, we divide the player level through the max level and add one
+		new Float:AddedXPs = float( p_data[id][PLAYER_LVL] / MAX_LEVEL ) + 1.0;
+		
+		// Now we multiple this with the default XPs
+		XPs = floatround( float( XPs ) * AddedXPs );
+		
+		// Okay. Here comes the employment for the xp multiplier
+		XPs = floatround( float( XPs ) * XPmultiplier );
+	}
+	
+	// return the xps
+	return XPs;
+}
+/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
+*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1031\\ f0\\ fs16 \n\\ par }
+*/

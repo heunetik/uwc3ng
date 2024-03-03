@@ -1,0 +1,86 @@
+// Uwc3ng Menu functions
+
+// Show the uwc3ng menu
+public MENU_war3menu( id )
+{
+	static MenuText[512], KEYS;
+	
+	// Add the header
+	copy( MenuText, charsmax( MenuText ), "\yUWC3NG: Main Menu^n^n" );
+	
+	// Add every menupoint
+	add( MenuText, charsmax( MenuText ), "\w%1. Skills Menu^n" );
+	add( MenuText, charsmax( MenuText ), "\w%2. Item Menu^n" );
+	add( MenuText, charsmax( MenuText ), "\w%3. Help^n" );
+	add( MenuText, charsmax( MenuText ), "\w%4. UWC3NG Credits^n" );
+	add( MenuText, charsmax( MenuText ), "\w%5. Commands List^n" );
+	add( MenuText, charsmax( MenuText ), "\w%6. Your Character Sheet^n" );
+	add( MenuText, charsmax( MenuText ), "\w%7. Admin Menu^n" );
+	add( MenuText, charsmax( MenuText ), "^n\w0. Exit^n" );
+	
+	// Add the keys
+	KEYS = (1<<9) | (1<<0) | (1<<1)| (1<<2) | (1<<3) | (1<<4) | (1<<5) | (1<<6);
+	
+	// Show the menu
+	show_menu( id, MenuText, KEYS, 25, "War3Menu" );
+	
+	return;
+}
+
+// Handle the war3menu
+public MENU_HandleWar3( id, key )
+{
+	if ( !is_user_connected( id ) )
+	{
+		return;
+	}
+	
+	switch ( key )
+	{
+		case 9: // Exit
+		{
+			return;
+		}
+		
+		case 0: // Skills Menu
+		{
+			return;
+		}
+		
+		case 1: // Item Menu
+		{
+			return;
+		}
+		
+		case 2: // Help
+		{
+			return;
+		}
+		
+		case 3: // Uwc3ng credits
+		{
+			MOTD_ShowCreditsHelp( id );
+		}
+		
+		case 4: // Commands list 
+		{
+			MOTD_ShowCommandHelp( id );
+		}
+		
+		case 5: // Character Sheet
+		{
+			MOTD_CharacterSheet( id, 0 );
+		}
+		
+		case 6: // Admin Menu
+		{
+			return;
+		}
+	}
+	
+	return;
+}
+		
+/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
+*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1031\\ f0\\ fs16 \n\\ par }
+*/

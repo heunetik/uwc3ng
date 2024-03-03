@@ -1,0 +1,37 @@
+// Uwc3ng Util functions (from wc3ft)
+
+public UTIL_GetWeaponName( iWeapon, szWpnName[], len )
+{
+	switch ( iWeapon )
+	{
+		case CSW_KNIFE:			copy( szWpnName, len, "knife"		);
+		case CSW_USP:           copy( szWpnName, len, "usp"			);
+		case CSW_GLOCK18:       copy( szWpnName, len, "glock18"		);
+		case CSW_DEAGLE:        copy( szWpnName, len, "deagle"		);
+		case CSW_P228:          copy( szWpnName, len, "p228"		);
+		case CSW_ELITE:         copy( szWpnName, len, "elite"		);
+		case CSW_FIVESEVEN:     copy( szWpnName, len, "fiveseven"	);
+		case CSW_M3:            copy( szWpnName, len, "m3"			);
+		case CSW_XM1014:        copy( szWpnName, len, "xm1014"		);
+		case CSW_MP5NAVY:       copy( szWpnName, len, "mp5navy"		);
+		case CSW_TMP:           copy( szWpnName, len, "tmp"			);
+		case CSW_P90:           copy( szWpnName, len, "p90"			);
+		case CSW_MAC10:         copy( szWpnName, len, "mac10"		);
+		case CSW_UMP45:         copy( szWpnName, len, "ump45"		);
+		case CSW_AK47:          copy( szWpnName, len, "ak47"		);
+		case CSW_SG552:         copy( szWpnName, len, "sg552"		);
+		case CSW_M4A1:          copy( szWpnName, len, "m4a1"		);
+		case CSW_AUG:           copy( szWpnName, len, "aug"			);
+		case CSW_SCOUT:         copy( szWpnName, len, "scout"		);
+		case CSW_AWP:           copy( szWpnName, len, "awp"			);
+		case CSW_SG550:         copy( szWpnName, len, "sg550"		);
+		case CSW_G3SG1:         copy( szWpnName, len, "g3sg1"		);
+		case CSW_GALI:          copy( szWpnName, len, "galil"		);
+		case CSW_FAMAS:         copy( szWpnName, len, "famas"		);
+		case CSW_M249:          copy( szWpnName, len, "m249"		);
+		case CSW_HEGRENADE:     copy( szWpnName, len, "grenade"		);
+	}
+}
+/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
+*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1031\\ f0\\ fs16 \n\\ par }
+*/

@@ -1,0 +1,79 @@
+// Uwc3ng motd functions
+
+// Show the player the players which are on the server
+public MOTD_ShowPlayers( id )
+{
+	if ( !is_user_connected( id ) )
+	{
+		return PLUGIN_HANDLED;
+	}
+	
+	static message[4096], name[32], players[32];
+	static numplayers, i, playerid; 
+	
+	// Get the players from the server
+	get_players ( players, numplayers );
+   
+	// Okay, first we need the header
+	formatex ( message, charsmax( message ), "<body bgcolor=#000000 text=#FFB000>^n" );
+	formatex ( message, charsmax( message ), "%s<center><b>The following players are online</b></center><p>^n", message );
+	formatex ( message, charsmax( message ), "%s<center><table width=800 border=1 cellpadding=4 cellspacing=4>^n", message );
+	formatex ( message, charsmax( message ), "%s<tr><td>Name</td><td>Team</td><td>Level</td></tr>^n", message );
+
+	// There we save the team
+	static PlayerTeam[32];
+
+	for ( i = 0; i < numplayers; ++i )
+	{
+		playerid = players[i];
+
+		get_user_name( playerid, name, charsmax( name ) );
+		
+		switch ( get_user_team( playerid ) )
+		{
+			case TEAM_T: // Terrorists
+			{
+				PlayerTeam = "Terrorist";
+			}
+			
+			case TEAM_CT: // Counterterrorists
+			{
+				PlayerTeam = "CT";
+			}
+			
+			default: // Else
+			{
+				PlayerTeam = "Spectator";
+			}
+		}
+		
+		formatex ( message, charsmax( message ), "%s<tr><td>%s</td><td>%s</td><td>%d</td></tr>^n", message, name, PlayerTeam, Player_Level[playerid], name );
+	}
+
+	// We add the end
+	formatex ( message, charsmax( message ), "%s</table></center>^n", message ); 
+	
+	// write it in a file
+	new showplayersfile[64];
+	get_configsdir( showplayersfile, charsmax( showplayersfile ) );
+	
+	// Format the right place
+	formatex ( showplayersfile, charsmax( showplayersfile ), "%s/uwc3ng/gamehelp/players.txt", showplayersfile );
+	
+	// Check if the file exists - if it exists delete it because our is newer
+	if ( file_exists( showplayersfile ) )
+	{
+		delete_file ( showplayersfile );
+	}
+	
+	// write the new file
+	write_file ( showplayersfile, message );
+	
+	// show the player the motd
+	show_motd ( id, showplayersfile, "Players on the Server" );
+	
+	return PLUGIN_CONTINUE;
+}
+/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
+*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1031\\ f0\\ fs16 \n\\ par }
+*/

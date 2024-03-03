@@ -1,0 +1,57 @@
+// Uwc3ng other functions
+
+// gives a player a weapon efficiently
+stock ham_give_weapon(id,weapon[])
+{
+    if(!equal(weapon,"weapon_",7)) return 0;
+
+    new wEnt = engfunc(EngFunc_CreateNamedEntity,engfunc(EngFunc_AllocString,weapon));
+    if(!pev_valid(wEnt)) return 0;
+
+    set_pev(wEnt,pev_spawnflags,SF_NORESPAWN);
+    dllfunc(DLLFunc_Spawn,wEnt);
+    
+    if(!ExecuteHamB(Ham_AddPlayerItem,id,wEnt))
+    {
+        if(pev_valid(wEnt)) set_pev(wEnt,pev_flags,pev(wEnt,pev_flags) | FL_KILLME);
+        return 0;
+    }
+
+    ExecuteHamB(Ham_Item_AttachToPlayer,wEnt,id)
+    return 1;
+}
+ 
+// takes a weapon from a player efficiently
+stock ham_strip_weapon(id,weapon[])
+{
+    if(!equal(weapon,"weapon_",7)) return 0;
+
+    new wId = get_weaponid(weapon);
+    if(!wId) return 0;
+
+    new wEnt;
+    while((wEnt = engfunc(EngFunc_FindEntityByString,wEnt,"classname",weapon)) && pev(wEnt,pev_owner) != id) {}
+    if(!wEnt) return 0;
+
+    if(get_user_weapon(id) == wId) ExecuteHamB(Ham_Weapon_RetireWeapon,wEnt);
+
+    if(!ExecuteHamB(Ham_RemovePlayerItem,id,wEnt)) return 0;
+    ExecuteHamB(Ham_Item_Kill,wEnt);
+
+    set_pev(id,pev_weapons,pev(id,pev_weapons) & ~(1<<wId));
+
+    // this block should be used for Counter-Strike:
+    if(wId == CSW_C4)
+    {
+        cs_set_user_plant(id,0,0);
+        cs_set_user_bpammo(id,CSW_C4,0);
+    }
+    else if(wId == CSW_SMOKEGRENADE || wId == CSW_FLASHBANG || wId == CSW_HEGRENADE)
+        cs_set_user_bpammo(id,wId,0);
+
+    return 1;
+}
+
+/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
+*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1031\\ f0\\ fs16 \n\\ par }
+*/

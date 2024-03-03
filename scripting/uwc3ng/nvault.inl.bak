@@ -1,0 +1,95 @@
+// Uwc3ng nvault functions
+
+public NVAULT_Init()
+{
+	nvault_handle = nvault_open ( NVAULT_FILE );
+	
+	if ( nvault_handle == INVALID_HANDLE )
+	{
+		log_amx ( "Error while setting up NVAULT connection!" );
+	}
+}
+
+public NVAULT_SaveXP( id )
+{
+	// Checks how to save the xps
+	new szKey[512];
+	DB_GetKey( id, szKey, charsmax( szKey ) );
+	
+	// We add a prefix to the key
+	formatex ( szKey, charsmax( szKey ), "%s-UWC3NG", szKey );
+	
+	// We format the text for saving
+	static savetext[512];
+	formatex ( savetext, charsmax( savetext ), "%d#", p_data[id][PLAYER_XP] );
+	
+	// We have to add the skills
+	static i;
+	for ( i = 0; i < MAX_SKILLS; ++i )
+	{
+		// i = every skill, p_data_skill = the level from the skill
+		formatex ( savetext, charsmax( savetext ), "%s%d#%d#", savetext, i, p_data_skill[id][i] );
+	}
+	
+	// kk. Save the data
+	nvault_set ( nvault_handle, szKey, savetext );
+	
+	return PLUGIN_CONTINUE;
+}
+
+public NVAULT_GetXP( id )
+{
+	// Checks how to get the xps
+	new g_Saveby[128], g_SavebyType[128]; 
+	Check_SL ( g_Saveby, charsmax( g_Saveby ), g_SavebyType, charsmax( g_SavebyType ),  id );
+	
+	// We add a prefix to the key
+	formatex ( g_Saveby, charsmax( g_Saveby ), "%s-SPARTA", g_Saveby );
+	
+	// We get the data from the nvault file
+	static gettext[512], time;
+	nvault_lookup ( nvault_handle, g_Saveby, gettext, charsmax( gettext ), time );
+	
+	// First we read the xps and the ultimate from the player's data
+	static XPinStr[64], UltinStr[64];
+	strtok( gettext, XPinStr, charsmax( XPinStr ), gettext, charsmax( gettext ), '#' );
+	strtok( gettext, UltinStr, charsmax( UltinStr ), gettext, charsmax( gettext ), '#' );
+		
+	// Save the xps & ultimate in the array
+	Player_XPs[id] = str_to_num ( XPinStr );
+	Player_Ultimate[id] = str_to_num ( UltinStr );
+	
+	// Get the skill id's and the level's from the string
+	static i, TempIDStr[64], TempLevelStr[64];
+	for ( i = 0; i < MAX_SKILLS; ++i )
+	{
+		// We read every skill the id and the level from the player
+		strtok( gettext, TempIDStr, charsmax( TempIDStr ), gettext, charsmax( gettext ), '#' );
+		strtok( gettext, TempLevelStr, charsmax( TempLevelStr ), gettext, charsmax( gettext ), '#' );
+		
+		// Convert all and save it in the array
+		Player_Skill[id][str_to_num( TempIDStr )] = str_to_num( TempLevelStr );
+	}
+	
+	// Get the level from the player
+	GetPlayerLevel( id );
+	
+	// Check if the ultimate from the player wrong
+	CheckLoseUltimate( id );
+	
+	// The player get on the server, maybe he forgot to skill now we calculate this!
+	CheckAvailableSkills( id );
+	
+	return PLUGIN_CONTINUE;
+}
+
+public NVAULT_CloseNow()
+{
+	if ( nvault_handle != INVALID_HANDLE )
+	{
+		nvault_close ( nvault_handle );
+	}
+}
+/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
+*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1031\\ f0\\ fs16 \n\\ par }
+*/

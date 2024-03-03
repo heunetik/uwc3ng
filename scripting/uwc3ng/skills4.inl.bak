@@ -1,0 +1,33 @@
+// Uwc3ng skills4 functions ( 24-32 )
+
+// Critical Grenade
+public SKILL_CriticalGrenade( iAttacker, iVictim, iDamage, iWeapon, iHitPlace )
+{
+	new iSkillLevel = p_data_skill[iAttacker][SKILL_CRITICALGRENADE];
+	
+	// Has this player critical grenade?
+	if ( iSkillLevel )
+	{
+		// Is the weapon a hegrenade?
+		if ( iWeapon == CSW_HEGRENADE )
+		{
+			static iMaxHealth, iBonusDamage;
+			iMaxHealth = get_user_maxhealth( iVictim );
+			iBonusDamage = floatround( float( iDamage ) * p_grenade[iSkillLevel-1] );
+				
+			// Damage the user!
+			UWC3NG_DoDamage( iVictim, iAttacker, iBonusDamage, iWeapon, iHitPlace );
+
+			// Make the user glow
+			SHARED_Glow( iVictim, iBonusDamage, 0, 0, 0 );
+
+			// Lets make a screenfade
+			Create_ScreenFade( iVictim, (1<<10), (1<<10), (1<<12), 255, 0, 0, g_GlowLevel[iVictim][0] );
+		}
+	}
+	
+	return;
+}
+/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
+*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1031\\ f0\\ fs16 \n\\ par }
+*/

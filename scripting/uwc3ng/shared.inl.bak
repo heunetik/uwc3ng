@@ -1,0 +1,224 @@
+// Uwc3ng SHARED functions
+
+// Set up the quipment reincarnation
+public SHARED_Give_Player_Weapons( id )
+{
+	id -= TASK_GIVEITEMS;
+	
+	if ( !is_user_alive( id ) )
+	{
+		return;
+	}
+	
+	// Check to see if the user should have the bomb
+	new bool:bGiveBomb = false;
+	if ( cs_get_user_plant( id ) )
+	{
+		bGiveBomb = true;
+	}
+
+	// Remove all weapons
+	strip_user_weapons( id );
+
+	// Give armor
+	if ( p_data[id][P_LASTARMOR] )
+	{
+		cs_set_user_armor( id, p_data[id][P_LASTARMOR], g_ArmorType[id] );
+	}
+	
+	// Give a defuse kit
+	if ( p_data_b[id][PB_DEFUSE] )
+	{
+		give_item(id, "item_thighpack");
+	}
+
+	if ( p_data_b[id][PB_NIGHTVISION] )
+	{
+		cs_set_user_nvg( id, 1 );
+	}
+
+	// Give the user a bomb
+	if ( bGiveBomb )
+	{
+		ham_give_weapon( id, "weapon_c4" );
+
+		cs_set_user_plant( id, 1, 1 );
+	}
+	
+	new iWeapID = 0, i = 0, bool:bPrimaryFound = false;
+	for ( i = 0; i < 32; i++ )
+	{
+		iWeapID = g_PlayerLastWeapons[id][i];
+
+		if ( iWeapID )
+		{
+			if ( iWeapID != CSW_C4 && iWeapID != CSW_FLASHBANG )
+			{
+				new szWeaponName[32], szAmmoName[32];
+				get_weaponname( iWeapID, szWeaponName, 31 );
+				SHARED_GetAmmoName( iWeapID, szAmmoName, 31 );
+				
+				if ( contain( szWeaponName, "weapon_" ) == 0 )
+				{
+					ham_give_weapon( id, szWeaponName );
+
+					if ( strlen( szAmmoName ) > 0 )
+					{
+						give_item( id, szAmmoName );
+						give_item( id, szAmmoName );
+						give_item( id, szAmmoName );
+						give_item( id, szAmmoName );
+						give_item( id, szAmmoName );
+					}
+				}
+			}
+		}
+
+		if ( SHARED_IsPrimaryWeapon( iWeapID ) )
+		{
+			new szWeaponName[32];
+			get_weaponname( iWeapID, szWeaponName, 31 );
+
+			bPrimaryFound = true;
+		}
+	}
+
+	// Only give it if the user doesn't have a primary weapon
+	if ( p_data_b[id][PB_SHIELD] )
+	{
+		if ( !bPrimaryFound )
+		{
+			ham_give_weapon( id, "weapon_shield" );
+		}
+	}
+
+	// Give them their flash bangs back
+	while ( p_data[id][P_FLASHCOUNT] > 0 )
+	{
+		ham_give_weapon( id, "weapon_flashbang" );
+
+		p_data[id][P_FLASHCOUNT]--;
+	}
+
+	set_task( 0.4, "SHARED_SetSilenceBurst", TASK_SILENCEBURST + id );
+
+	return;
+}
+
+// Set up equipmenut reincarnation
+public SHARED_SetSilenceBurst( id )
+{
+	id -= TASK_SILENCEBURST;
+	
+	if ( !is_user_alive( id ) )
+	{
+		return;
+	}
+	
+	new iWeaponEnt = find_ent_by_owner( -1, "weapon_m4a1", id );
+	if ( is_valid_ent( iWeaponEnt ) )
+	{
+		cs_set_weapon_silen( iWeaponEnt, p_data_b[id][PB_M4A1_SILENCED], 1 );
+	}
+
+	iWeaponEnt = find_ent_by_owner( -1, "weapon_usp", id );
+	if ( is_valid_ent( iWeaponEnt ) )
+	{
+		cs_set_weapon_silen( iWeaponEnt, p_data_b[id][PB_USP_SILENCED], 1 );
+	}
+
+	iWeaponEnt = find_ent_by_owner( -1, "weapon_famas", id );
+	if ( is_valid_ent( iWeaponEnt ) )
+	{
+		cs_set_weapon_burst( iWeaponEnt, p_data_b[id][PB_FAMAS_BURST] );
+	}
+
+	iWeaponEnt = find_ent_by_owner( -1, "weapon_glock18", id );
+	if ( is_valid_ent( iWeaponEnt ) )
+	{
+		cs_set_weapon_burst( iWeaponEnt, p_data_b[id][PB_GLOCK_BURST] );
+	}
+}
+
+// Set up equipment reincarnation
+// Copy the weapons over right before reset hud is called, that way we don't lose our last round weapons when the round restarts
+public SHARED_CopySavedWeapons()
+{
+	for ( new i = 0; i < 33; i++ )
+	{
+		for ( new j = 0; j < 32; j++ )
+		{
+			g_PlayerLastWeapons[i][j] = g_PlayerWeapons[i][j];
+		}
+	}
+}
+
+// Function will return an ammo name given a weapon ID
+SHARED_GetAmmoName( iWeapID, szAmmoName[], len )
+{
+	switch( iWeapID )
+	{
+		case CSW_USP, CSW_MAC10, CSW_UMP45:
+		{ 
+			copy( szAmmoName, len, "ammo_45acp" );
+		}
+		case CSW_ELITE, CSW_GLOCK18, CSW_MP5NAVY, CSW_TMP:
+		{
+			copy( szAmmoName, len, "ammo_9mm" );
+		}
+		case CSW_FIVESEVEN, CSW_P90:
+		{
+			copy( szAmmoName, len, "ammo_57mm" );
+		}
+		case CSW_DEAGLE:
+		{
+			copy( szAmmoName, len, "ammo_50ae" );
+		}
+		case CSW_P228:
+		{
+			copy( szAmmoName, len, "ammo_357sig" );
+		}
+		case CSW_SCOUT, CSW_G3SG1, CSW_AK47:
+		{
+			copy( szAmmoName, len, "ammo_762nato" );
+		}
+		case CSW_XM1014, CSW_M3:
+		{
+			copy( szAmmoName, len, "ammo_buckshot" );
+		}
+		case CSW_AUG, CSW_SG550, CSW_GALIL, CSW_FAMAS, CSW_M4A1:
+		{
+			copy( szAmmoName, len, "ammo_556nato" );
+		}
+		case CSW_AWP:
+		{
+			copy( szAmmoName, len, "ammo_338magnum" );
+		}
+		case CSW_M249:
+		{
+			copy( szAmmoName, len, "ammo_556natobox" );
+		}
+		case CSW_SG552:
+		{
+			copy( szAmmoName, len, "ammo_556nato" );
+		}
+		default:
+		{
+			copy( szAmmoName, len, "" );
+		}
+	}
+}
+
+// Function checks to see if the weapon id is a primary weapon (used with Night Elf's Entangle)
+SHARED_IsPrimaryWeapon( iWeaponID )
+{
+	if ( iWeaponID == CSW_GALIL || iWeaponID == CSW_FAMAS || iWeaponID == CSW_M3 || iWeaponID == CSW_XM1014 || iWeaponID == CSW_MP5NAVY || iWeaponID == CSW_TMP || iWeaponID == CSW_P90 || iWeaponID == CSW_MAC10 || iWeaponID == CSW_UMP45 || iWeaponID == CSW_AK47 || iWeaponID == CSW_SG552 || iWeaponID == CSW_M4A1 || iWeaponID == CSW_AUG || iWeaponID == CSW_SCOUT || iWeaponID == CSW_AWP || iWeaponID == CSW_G3SG1 || iWeaponID == CSW_SG550 || iWeaponID == CSW_M249 )
+	{
+		return true;
+	}
+	
+	return false;
+}
+/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
+*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1031\\ f0\\ fs16 \n\\ par }
+*/

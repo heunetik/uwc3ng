@@ -1,0 +1,109 @@
+// Uwc3ng Skill handler functions
+
+public SKILL_ShowMenu( id, side )
+{
+	if ( !UWC3NG_Check() || !is_user_connected( id ) )
+	{
+		return;
+	}
+	
+	static MenuText[256];
+	copy ( MenuText, charsmax( MenuText ), "\ySkills Menu\w^n^n" );
+	
+	// We have to save the side for checking keys later
+	p_data[id][SKILL_SIDE] = side;
+	
+	static i, KEY; KEY = 0;
+	for ( i = side; i < MAX_SKILLS; ++i )
+	{
+		// Add every skill to the menu
+		formatex ( MenuText, charsmax( MenuText ), "%s\w%d. %s - %d/%d (lvl %d)^n", MenuText, i+1, Skill_Names[i], p_data_skill[id][i], Skill_Max_Points[i], Skill_REQLevel[i] );
+		
+		// This skill is available. Add a key to press for it
+		if ( p_data[id][PLAYER_LVL] >= Skill_REQLevel[i] && p_data_skill[id][i] != Skill_Max_Points[i] )
+		{
+			// we count it for the valid keys
+			KEY |= (1<<i);
+		}
+			
+		// The page is full
+		if ( ( i + 1 ) == MAX_SKILLS_ONSIDE )
+		{
+			formatex ( MenuText, charsmax( MenuText ), "%s^n\w%d. Next Page^n", MenuText, i+1 ); 
+			
+			// One key for this menupoint
+			KEY |= (1<<(i + 1));
+			break;
+		}
+	}
+	
+	// We add the exit button
+	formatex ( MenuText, charsmax( MenuText ), "%s^n\w0. Exit^n", MenuText );
+	
+	// One key for this menupoint
+	KEY |= (1<<9)
+	
+	// Show the player the menu
+	show_menu ( id, KEY, MenuText, 15, "SelectSkill" );
+	
+	return PLUGIN_CONTINUE;
+}
+
+public SetSkillMenu( id, key )
+{
+	if ( !is_user_connected( id ) )
+	{
+		return PLUGIN_CONTINUE;
+	}
+	
+	// The player want the next side
+	if ( key == 8 )
+	{
+		ChooseSkill( id, Player_SkillData[id][SKILL_SIDE]++ );
+		
+		return PLUGIN_CONTINUE;
+	}
+	
+	// The player exit the menu
+	else if ( key == 9 )
+	{
+		return PLUGIN_CONTINUE;
+	}
+		
+	// We calculate the menu entry
+	static MenuEntry;
+	MenuEntry = ( Player_SkillData[id][SKILL_SIDE] * ( MAX_SKILLS_ONSIDE - 1 ) ) + key;
+	
+	// Set his new Skill +1
+	Player_Skill[id][MenuEntry]++;
+	
+	// We remove one skillpoint because he set one
+	Player_SkillData[id][AVAILABLE_SKILLS]--;
+	
+	// Is he now on the maximum?
+	if ( Player_Skill[id][MenuEntry] == Skill_Max_Point[MenuEntry] )
+	{
+		client_print ( id, print_chat, "%s You are now a master of %s", SPARTA_NAME, Skill_Names[MenuEntry] );
+	}
+	
+	// He isn't at the maximum
+	else
+	{
+		// Show him a message an re-open the menu if he has more aviable skills to train
+		client_print ( id, print_chat, "%s You skilled %s", SPARTA_NAME, Skill_Names[MenuEntry] );
+	}
+	
+	// The player has more available skills, reopen the menu!
+	if ( Player_SkillData[id][AVAILABLE_SKILLS] > 0 )
+	{
+		ChooseSkill( id, Player_SkillData[id][SKILL_SIDE] );
+	}
+	
+	// Update his new skills
+	Update_Skills( id );
+	
+	return PLUGIN_CONTINUE;
+}
+/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
+*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1031\\ f0\\ fs16 \n\\ par }
+*/

@@ -1,0 +1,31 @@
+// Uwc3ng attribs functions
+
+// Display the select attribs menu
+public ATTRIB_ShowSelectMenu( id )
+{
+	// The header
+	new MenuText[512] = "", KEYS = (1<<9);
+	formatex( MenuText, charsmax( MenuText ), "\ySelect an Attribute to enhance [%d pts remaining]: \w^n", p_data[id][AVAILABLE_ATTRIBS] );
+	add( MenuText, charsmax( MenuText ), "\y(say /attribinfo for info about attributes) \w^n^n" );
+	
+	// Loop through all attribs
+	for ( new i = 0; i < MAX_ATTRIBS; ++i )
+	{
+		// Add every attrib to the menutext
+		formatex( MenuText, charsmax( MenuText ), "%s\w%d. %s     [ %d/%d ]^n", MenuText, i+1, Attribute_Names[i], p_data_attrib[id][i], MAX_ATTRIBS_POINTS ); 
+		
+		// Add every keypoint
+		KEYS |= (1<<i);
+	}
+	
+	// Add the exit menupoint
+	add( MenuText, charsmax( MenuText ), "^n\w0. Exit^n" );
+	
+	// Show the player the menu
+	show_menu ( id, KEYS, MenuText, 25, "AttribMenu" );
+	
+	return;
+}
+/* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
+*{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1031\\ f0\\ fs16 \n\\ par }
+*/
