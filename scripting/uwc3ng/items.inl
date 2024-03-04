@@ -542,7 +542,6 @@ public ITEM_RemoveCharge( id, iItem )
 
 			case ITEM_HELM:
 			{
-				server_print("rm - has helm");
 				g_iHelmCharges[id] -= CHARGE_DISPOSE;
 				
 				if ( g_iHelmCharges[id] <= 0 )

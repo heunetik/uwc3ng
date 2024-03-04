@@ -1090,7 +1090,7 @@ public ham_TraceAttack( iVictim, iAttacker, Float:damage, Float:direction[3], tr
 				if ( hitgroup == HIT_HEAD )
 				{
 					// Do the check to see if we should flash the screen orange
-					Create_ScreenFade( iVictim, (1<<10), (1<<10), (1<<12), 0, 0, 255, 150 );
+					Create_ScreenFade( iVictim, (1<<10), (1<<10), (1<<12), 0, 0, 255, 30 );
 
 					// Lets remove a charge from the helm!
 					ITEM_RemoveCharge( iVictim, ITEM_HELM );
