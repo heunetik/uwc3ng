@@ -645,7 +645,7 @@ public ITEM_Offensive( iAttacker, iVictim, iWeapon, iDamage, iHitPlace )
 			set_user_health( iAttacker, iHealth + iBonusHealth );
 		}
 
-		SHARED_Glow( iAttacker, 0, iBonusHealth, 0, 0 );
+		SHARED_Glow( iAttacker, 0, (2 * iBonusHealth), 0, 0 );
 
 		Create_ScreenFade( iAttacker, (1<<10), (1<<10), (1<<12), 0, 255, 0, g_GlowLevel[iAttacker][1] );
 	}
