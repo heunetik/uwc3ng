@@ -247,14 +247,14 @@ public XP_SetUpTable()
 	// If we use shortterm xps
 	if ( get_pcvar_num( CVAR_uwc3ng_save_xp ) )
 	{
-		// We divide through 10 for shortterm xps
-		XPs /= 10;
+		// Okay. We use longterm xps
+		XPs = floatround(XPs / 3.3333);
 	}
 	
-	// Okay. We use longterm xps
+	// We divide through 10 for shortterm xps
 	else
 	{
-		XPs /= 3;
+		XPs /= 10;
 	}
 		
 	// We loop through every entry and fill it up. Level zero is 0 xp 
