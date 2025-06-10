@@ -84,7 +84,7 @@ public _UTIL_CheckMinModelsValue( id, const cvar[], const value[] )
 }
 
 public UTIL_IsItemShorthand( szArg1[] ) {
-  new index = -1;
+  	new index = -1;
 
 	for(new i = 0; i < MAX_SHOPMENU_ITEMS; i++) {
 		if (equali( ShopmenuShort_Names[i], szArg1 )) {

@@ -342,7 +342,7 @@ public SKILL_LeatherSkin( id )
 		
 		// Get all players
 		static i, players[32], numofplayers, iTeam;
-		static origin[3], CsArmorType:ArmorType, iArmor;
+		static origin[3], CsArmorType:armorType, iArmor;
 		get_players( players, numofplayers );
 		
 		// Get the team from the skill owner
@@ -358,7 +358,7 @@ public SKILL_LeatherSkin( id )
 				if ( PLAYER_is_in_range( id, players[i], LEATHER_SKIN_RANGE ) )
 				{
 					// Get the armor from this player
-					iArmor = cs_get_user_armor( players[i], ArmorType );
+					iArmor = cs_get_user_armor( players[i], armorType );
 					
 					// We're at the maximum. Switch to the next player
 					if ( iArmor >= 100 || iArmor <= 0 )
@@ -370,7 +370,7 @@ public SKILL_LeatherSkin( id )
 					iArmor++;
 					
 					// Set the new armor
-					cs_set_user_armor( players[i], iArmor, ArmorType );
+					cs_set_user_armor( players[i], iArmor, armorType );
 					
 					// Get the origin from this player
 					get_user_origin( players[i], origin );

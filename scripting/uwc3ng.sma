@@ -43,7 +43,7 @@
 #include <engine>
 #include <csx>
 
-#define VERSION "2.35.6"
+#define VERSION "2.40.1"
 
 // --- Main includes ---
 #include "uwc3ng/constants.inl"		// Load the constants include file
@@ -322,8 +322,8 @@ public client_putinserver( id )
 		b_IsBot = true;
 	}
 	
-	// Check user's cvar if the user isn't a bot and if we're not running a 64-bit server
-	if ( !b_IsBot && !is_amd64_server() && get_pcvar_num( CVAR_uwc3ng_minmodels ) )
+	// Check user's cvar if the user isn't a bot
+	if ( !b_IsBot && get_pcvar_num( CVAR_uwc3ng_minmodels ) )
 	{
 		query_client_cvar( id, "cl_minmodels", "_UTIL_CheckMinModelsValue" );
 	}
@@ -383,7 +383,7 @@ public client_connect( id )
 	return;
 }
 
-public client_disconnect( id )
+public client_disconnected( id )
 {
 	if ( !UWC3NG_Check() )
 	{
@@ -497,8 +497,6 @@ public module_filter( const module[] )
 		
 		return PLUGIN_CONTINUE;
 	}
-
-	return PLUGIN_HANDLED;
 }
 
 public bool:UWC3NG_Check()

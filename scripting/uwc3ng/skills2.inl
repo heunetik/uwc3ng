@@ -11,20 +11,20 @@ public SKILL_SpikedCarapace( iAttacker, iVictim, iDamage, iHitPlace )
 		new iTemp = floatround( float( iDamage ) * p_spiked[iLevel-1] );
 		
 		// Give the victim some armor...
-		new CsArmorType:ArmorType;
-		new iCurArmor = cs_get_user_armor( iVictim, ArmorType );
+		new CsArmorType:armorType;
+		new iCurArmor = cs_get_user_armor( iVictim, armorType );
 		new const iMaxArmor = 100;
 			
 		// Then set their armor to be the max
 		if ( iCurArmor + iTemp > iMaxArmor )
 		{
-			cs_set_user_armor( iVictim, iMaxArmor, ArmorType );
+			cs_set_user_armor( iVictim, iMaxArmor, armorType );
 		}
 			
 		// Just give them some bonus armor
 		else
 		{
-			cs_set_user_armor( iVictim, iCurArmor + iTemp, ArmorType );
+			cs_set_user_armor( iVictim, iCurArmor + iTemp, armorType );
 		}
 				
 		if ( is_user_alive( iAttacker ) )
@@ -76,8 +76,8 @@ public SKILL_WcRepair( id )
 	get_user_name( FriendID, FriendName, charsmax( FriendName ) );
 	
 	// Get the armor from the friend
-	new CsArmorType:ArmorType;
-	new iCurArmor = cs_get_user_armor( FriendID, ArmorType );
+	new CsArmorType:armorType;
+	new iCurArmor = cs_get_user_armor( FriendID, armorType );
 	
 	// Need this player repair?
 	if ( iCurArmor <= 0 || iCurArmor >= 100 )
@@ -102,7 +102,7 @@ public SKILL_WcRepair( id )
 	}
 	
 	// Set the new armor
-	cs_set_user_armor( FriendID, iBonusArmor, ArmorType );
+	cs_set_user_armor( FriendID, iBonusArmor, armorType );
 	
 	// Create pentagram symbols
 	static origin[3];
@@ -113,9 +113,9 @@ public SKILL_WcRepair( id )
 	static ShownText[256];
 	formatex( ShownText, charsmax( ShownText ), "%s has made some repairs to your armor", SkillOwnerName );
 	UWC3NG_StatusText( id, TXT_SKILL, ShownText );
-		
+	
 	// Play the repair sound
-	 emit_sound ( id, CHAN_ITEM, g_szSounds[SOUND_REPAIR], 1.0, ATTN_NORM, 0, PITCH_NORM );
+	emit_sound( id, CHAN_ITEM, g_szSounds[SOUND_REPAIR], 1.0, ATTN_NORM, 0, PITCH_NORM );
 	
 	// Calculate the xps which the player should get
 	new iXPs = XP_Calc( id, REPAIR_HEAL );
@@ -205,11 +205,11 @@ public SKILL_WcMend( id )
 	UWC3NG_StatusText( id, TXT_SKILL, ShownText );
 		
 	// Play the mend sound
-	 emit_sound ( id, CHAN_ITEM, g_szSounds[SOUND_MEND], 1.0, ATTN_NORM, 0, PITCH_NORM );
+	emit_sound( id, CHAN_ITEM, g_szSounds[SOUND_MEND], 1.0, ATTN_NORM, 0, PITCH_NORM );
 	
 	// Calculate the xps which the player should get
 	new iXPs = XP_Calc( id, MEND_HEAL );
-		
+	
 	// Give him the xps
 	new iBonusXP = XP_Give( id, iXPs );
 

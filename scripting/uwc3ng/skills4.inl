@@ -679,8 +679,6 @@ SKILL_HLP_Diff( iNum, iNum2 )
 	{
 		return (iNum2-iNum);
 	}
-
-	return 0;
 }
 // ---------------------------------------- End Locust Swarm ---------------------------------------
 		

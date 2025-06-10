@@ -16,6 +16,7 @@ public HandleSay( id )
 	remove_quotes( talk );
 		
 	// Parse the chat
+	// Using 'strbreak' to keep 1.8.2 compatibility
 	strbreak( talk, szArg1, charsmax( szArg1 ), szArg2, charsmax( szArg2 ) );
 	new shopmenuItem = UTIL_IsItemShorthand(szArg1);
 	

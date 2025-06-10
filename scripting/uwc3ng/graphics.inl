@@ -209,12 +209,12 @@ stock Create_ScoreInfo(id,frags,deaths,playerClass,team ){
 stock Create_Sprite(id, idself, sprite){
 	
 	message_begin(MSG_ONE,SVC_TEMPENTITY,{0,0,0},idself)
-         write_byte(TE_PLAYERATTACHMENT)
-         write_byte(id)
-         write_coord(30)       // z axis for sprite
-         write_short(sprite)  // which sprite to display
-         write_short(50)
-         message_end()
+	write_byte(TE_PLAYERATTACHMENT)
+	write_byte(id)
+	write_coord(30)       // z axis for sprite
+	write_short(sprite)  // which sprite to display
+	write_short(50)
+	message_end()
 }
 
 // Create pentagram symbols
@@ -429,12 +429,12 @@ stock Create_TE_Smoke(originSight[3], position[3], iSprite, scale, framerate){
 stock Create_CarrionShadowDOT( id, iSprite ){
 	
 	message_begin( MSG_ALL, SVC_TEMPENTITY )
-         write_byte( TE_PLAYERATTACHMENT )
-         write_byte( id ) 
-         write_coord( 0 )
-         write_short( iSprite )
-         write_short( 25 )
-         message_end()
+	write_byte( TE_PLAYERATTACHMENT )
+	write_byte( id ) 
+	write_coord( 0 )
+	write_short( iSprite )
+	write_short( 25 )
+	message_end()
 }
 /* AMXX-Studio Notes - DO NOT MODIFY BELOW HERE
 *{\\ rtf1\\ ansi\\ deff0{\\ fonttbl{\\ f0\\ fnil Tahoma;}}\n\\ viewkind4\\ uc1\\ pard\\ lang1031\\ f0\\ fs16 \n\\ par }

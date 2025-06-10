@@ -641,10 +641,10 @@ public SKILL_SteelSkin( iAttacker, iVictim, iDamage )
 		// Will this hit a steel skin hit?
 		if ( random_float( 0.0, 1.0 ) <= p_steel[iSkillLevel-1] )
 		{
-			static iArmor, CsArmorType:ArmorType;
+			static iArmor, CsArmorType:armorType;
 			
 			// Get the current armor
-			iArmor = cs_get_user_armor( iAttacker, ArmorType );
+			iArmor = cs_get_user_armor( iAttacker, armorType );
 			
 			// Add the bonus armor
 			iArmor += iDamage;
@@ -656,7 +656,7 @@ public SKILL_SteelSkin( iAttacker, iVictim, iDamage )
 			}
 			
 			// Set the new armor
-			cs_set_user_armor( iAttacker, iArmor, ArmorType );
+			cs_set_user_armor( iAttacker, iArmor, armorType );
 			
 			// Make the user glow
 			SHARED_Glow( iAttacker, iArmor, 0, 0, 0 );

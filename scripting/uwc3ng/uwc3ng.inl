@@ -335,9 +335,9 @@ public UWC3NG_DrawSprite( id )
 	}
 	
 	// Get the life and the armor
-	static iHealth, iArmor, CsArmorType: ArmorType;
+	static iHealth, iArmor, CsArmorType: armorType;
 	iHealth = get_user_health( id );
-	iArmor = cs_get_user_armor( id, ArmorType );
+	iArmor = cs_get_user_armor( id, armorType );
 	
 	new bool:ShowHealth = false, bool:ShowArmor = false;
 	
