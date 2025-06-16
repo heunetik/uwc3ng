@@ -441,19 +441,27 @@ public SHARED_ChangeSkin( id, iOptions )
 	if ( iOptions == 0 )
 	{
 		cs_reset_user_model( id );
+		return;
 	}
+
+	// Get the team
+	new iTeam = get_user_team( id );
 	
 	// The player should be a zombie
-	else if ( iOptions == 1 )
+	if ( iOptions == 1 )
 	{
 		cs_set_user_model( id, "zombie" );
+
+		// Color CT zombies blue so they're easier to tell apart
+		if( iTeam == TEAM_CT ) {
+			set_user_info( id, "topcolor", "160" );
+			set_user_info( id, "bottomcolor", "160" );
+		}
 	}
 	
 	// Mole
 	else if ( iOptions == 2 )
 	{
-		// Get the team
-		new iTeam = get_user_team( id );
 		new szSkin[32]
 		
 		// Get one random model

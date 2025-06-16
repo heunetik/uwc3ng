@@ -43,7 +43,7 @@
 #include <engine>
 #include <csx>
 
-#define VERSION "2.40.1"
+#define VERSION "2.40.2"
 
 // --- Main includes ---
 #include "uwc3ng/constants.inl"		// Load the constants include file
