@@ -151,27 +151,8 @@ public SKILL_Impale( iAttacker, iVictim )
 // Devotion Aura
 public SKILL_DevotionAura( id )
 {
-	new iLevel = p_data_skill[id][SKILL_DEVOTION];
-	new iLevelStrength = p_data_attrib[id][ATTRIB_STRENGTH];
-	new iBonusHealth = 0;
-		
-	// Has this player devotion aura?
-	if ( iLevel )
-	{
-		iBonusHealth = p_devotion[iLevel-1];
-	}
-	
-	// Add attribute strength bonus
-	if ( iLevelStrength > MAX_ATTRIBS_STARTPOINTS )
-	{
-		iBonusHealth += AGILITY_HEALTH_BONUS * ( iLevelStrength - MAX_ATTRIBS_STARTPOINTS );
-	}
-	
-	// Add the new health
-	if ( iBonusHealth != 0 )
-	{
-		set_user_health( id, ( 100 + iBonusHealth ) );
-	}
+	// Max health calculation already done in the func, we just need to apply
+	set_user_health( id, PLAYER_get_maxhealth( id ) );
 	
 	return;
 }
