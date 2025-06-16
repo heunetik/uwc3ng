@@ -28,6 +28,7 @@ public PLAYER_get_maxhealth( id )
 	new iLevel = p_data_skill[id][SKILL_DEVOTION];
 	new iLevelStrength = p_data_attrib[id][ATTRIB_STRENGTH];
 	new iHealth = 0;
+	new iHasPeriapt = ITEM_Has( id, ITEM_HEALTH ) > ITEM_NONE;
 	
 	// The player has devotion aura
 	if ( iLevel )
@@ -40,6 +41,11 @@ public PLAYER_get_maxhealth( id )
 	if ( iLevelStrength > MAX_ATTRIBS_STARTPOINTS )
 	{
 		iHealth += AGILITY_HEALTH_BONUS * ( iLevelStrength - MAX_ATTRIBS_STARTPOINTS );
+	}
+
+	// The player has Periapt
+	if ( iHasPeriapt ) {
+		iHealth += get_pcvar_num( CVAR_uwc3ng_health );
 	}
 	
 	// CS default health is 100
