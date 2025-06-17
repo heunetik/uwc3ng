@@ -843,18 +843,16 @@ public _ITEM_Ring( id )
 		return;
 	}
 
-	new iBonusHealth = g_iTotalRings[id];
+	new iCurrentHealth = get_user_health( id );
+	new iMaxHealth = PLAYER_get_maxhealth( id );
 
-	while ( iBonusHealth > 0 )
-	{
-		new iHealth =  get_user_health( id ) + 1;
+	new iPostTickHealth = iCurrentHealth + g_iTotalRings[id];
+	new iTargetHealth = iPostTickHealth >= iMaxHealth ? iMaxHealth : iPostTickHealth;
 
-		if ( iHealth <= PLAYER_get_maxhealth( id ) )
-		{
-			set_user_health( id, iHealth );
-		}
-
-		iBonusHealth--;
+	// If the user is already on max health, no need to update hp
+	if ( iCurrentHealth != iMaxHealth ) {
+		// Set health only once per task
+		set_user_health( id, iTargetHealth );
 	}
 
 	set_task( 2.0, "_ITEM_Ring", TASK_ITEM_RING + id );
